@@ -1,18 +1,20 @@
-# NBA
+# NBA 薪資預測
 
 ### Groups
-* < name, student ID1 >
-* < name, student ID2 >
-* < name, student ID3 >
-* ...
+* 王瀚 104703002
+* 徐躍華 104703004
+* 徐子崴 104703006
+* 林資超 104703042
 
 ### Goal
-A breif introduction about your project, i.e., what is your goal?
+收集各年度NBA球員各項數據，藉此預測球員未來薪資。
 
 ### Demo 
 You should provide an example commend to reproduce your result
-```R
-Rscript code/your_script.R --input data/training --output results/performance.tsv
+```Python
+jupyter notebook code/data_preprocess.ipynb #根據www.basketball-reference.com，爬下並前處理資料
+jupyter notebook code/visualization.ipynb #Visualization
+jupyter notebook code/modeling.ipynb #Training Model
 ```
 * any on-line visualization
 
