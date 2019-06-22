@@ -1,0 +1,183 @@
+body{
+  background-color: #272B35;
+  height: 100vh;
+  overflow: hidden;
+}
+*{
+	user-select: none;
+}
+.panel{
+  background-color: #E3E5E3;
+  height: 80vh;
+  margin-top: 10vh;
+  z-index: 2;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #0A153C;
+  border: 0;
+}
+.Name{
+  color: #B2B2B2;
+  font-size: 21px;
+  margin-left: 60px;
+}
+.lastName{
+  color: white;
+  font-size: 30px;
+  margin-left: 60px;
+  font-weight: 400;
+}
+.nameArea{
+  float: left;
+}
+.player-photo{
+  width: 260px;
+  margin-top: 30px;
+  transform: translate(-20px,0);
+  float: left;
+}
+.player_parent{
+  overflow: hidden;
+  width: calc( 100% - 60px );
+  margin-left: 30px;
+  margin-top: 40px;
+}
+.player_head{
+  width: 100%;
+  z-index: 2;
+  position: relative;
+}
+.player_shadow{
+  -webkit-box-shadow: 0px 0px 98px -23px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 98px -23px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 98px -23px rgba(0,0,0,0.75);
+}
+.player_list{
+  max-height: calc( 80vh - 327px );
+  overflow: scroll;
+  width: 100%;
+  position: relative;
+  transform: translate(0,-37px);
+  z-index: 0;
+}
+.fixed{
+  position: fixed;
+}
+.player_table{
+  width: 100%;
+  text-align: left;
+}
+.player_table tr:nth-of-type(2n){
+  background-color: #FCFCFC;
+}
+.player_table tr:nth-of-type(2n+1){
+  background-color: #F9F9F9;
+}
+.player_table th,td{
+  height: 37px;
+  text-align: left;
+  cursor: pointer;
+}
+.player_table th{
+  cursor: default;
+}
+.player_table td.center,th.center{
+  text-align: center;
+}
+.player_table tr:not(.no-light):not(.select):hover{
+  background-color: lightgray;
+}
+.no-light{
+  background-color: #F9F9F9!important;
+}
+.player_table tr.select{
+  background-color: #272B35;
+  color: white;
+}
+.info-panel-content{
+  z-index: 20;
+  padding-top: 30px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: inline-block;
+}
+.stats-group{
+  float: left;
+  margin-top: 18px;
+}
+.jersey{
+  float: left;
+  color: gray;
+  opacity: 0.8;
+  font-size: 150px;
+  position: absolute;
+  margin-left: 40px;
+  margin-top: 85px;
+  z-index: 2;
+}
+.info-panel{
+  background-color: #1A2133;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+.team-banner{
+  background-color: #008248;
+  color: white;
+  cursor: default;
+}
+.calc_result{
+  float: right;
+  margin-right: 60px;
+  width: 250px;
+  height: 37px;
+  outline: none;
+  border: 0;
+  background-color: #0A153C;
+  color: white;
+  margin-top: 45px;
+  position: absolute;
+  right: 0px;
+  bottom: 30px;
+}
+.calc_result:hover{
+  background-color: #2D467F;
+}
+.result_panel{
+  padding-right: 60px;
+}
+.loader{
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  text-align: center;
+  margin-top: -10vh;
+  color: white;
+  display: none;
+}
+.blur{
+  filter: blur(10px);
+}
+.resultChar1Container{
+  height: calc( 80vh - 300px )!important;
+  width: calc( 80vh - 300px )!important;
+  position: relative;
+}
+.stats-group-container{
+  display: inline-block;
+  width: calc( 100% - 80vh + 250px );
+  vertical-align: top;
+}
+.stats-group-container .stats-group{
+  margin-top: 30px;
+}
+.Name .ft {
+  color: white;
+  font-size: 30px;
+  margin-left: 60px;
+  font-weight: 400;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NPSP</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/index.css">
+    <script src="/public/index.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid" style="z-index:2;height: 100vh;background-color:white;position:absolute;width:100%;opacity:0;">
+    </div>
+    <div class="container main-container">
+      <img class="logo" src="/public/image/logo_1.svg" />
+      <img class="bg" src="/public/image/background.png" />
+    </div>
+    <div class="container select-team">
+      <span class="glyphicon glyphicon-menu-left menu-control" next-id="29"></span>
+      <img class="team_logo" src="/public/logo/SAS_logo.svg" tid="0">
+      <span class="glyphicon glyphicon-menu-right menu-control" next-id="1"></span>
+      <h4 class="team_title">SAN ANTONIO SPURS</h4>
+      <button class="start_btn">Start</button>
+    </div>
+    <script>
+      $(window).scroll(function(){
+        $('.bg').css('opacity',0);
+        var reg = $(window).height()*0.8;
+        $('.bg').css('opacity',Math.min(($(window).scrollTop()/reg-1)*-1),0);
+        $('.container-fluid').css('opacity',Math.min($(window).scrollTop()/reg,1));
+        //$('.logo').css('margin-top','calc( 70vh + '+Math.max(Math.min(($(window).scrollTop()/reg*80),80),0)+'px )')
+        $('.logo').css('margin-top', (70+Math.max(Math.min(($(window).scrollTop()/reg*15),15),0))+'vh');
+        $('.feature-icon').css('margin-top', (68+Math.max(Math.min(($(window).scrollTop()/reg*15),15),0))+'vh');
+      })
+      $(document).ready(function(){
+        $('body').on('click','.start_btn',function(){
+          window.location = "/team/"+$('.team_logo').attr('tid');
+        });
+      });
+    </script>
+  </body>
+</html>

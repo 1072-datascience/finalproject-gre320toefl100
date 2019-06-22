@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>NPSP</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <link rel="stylesheet" href="/public/team.css">
+    <script src="/public/team.js"></script>
+    <style>
+    .bg{
+      position: absolute;
+      background: url("<%= team_logo %>") center center/100% no-repeat;
+      opacity: 0.2;
+      width: 100%;
+      height: 250px;
+      z-index: 1;
+    }
+    .result-group{
+      display: none;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="back-home-btn" style="line-height: 34px;cursor: pointer;text-align: center;font-weight: 800;position: absolute;width: 37px;height: 37px;font-size:21px;border-radius: 40px;background-color: white;left: 30px;top: 30px;">
+      <
+    </div>
+    <div class="container-fluid loader">
+      <img style="margin-top: calc( 50vh - 105px )" src="/public/SVG-Loaders-master/svg-loaders/bars.svg" />
+      <h3 style="line-height: 70px;">Loading...</h3>
+    </div>
+    <div class="container panel">
+      <div class="info-panel">
+        <div class="bg"></div>
+        <h3 class="jersey">#<%= team[0]['Jersey'] %></h3>
+        <div class="info-panel-content">
+          <div class="nameArea">
+            <font class="Name pname"><%= team[0].Name.split(' ',1) %><br><font class="lastName"><%= team[0].Name.replace(team[0].Name.split(' ',1)+' ','') %></font></font>
+          </div>
+          <img class="player-photo" src="/public/headshots/<%= team[0].PID %>.png" />
+          <div class="stats-group-container" style="float: right;position: absolute;right: 60px;display: block;">
+            <div class="stats-group">
+              <font class="Name pos">Position<br><font class="lastName"><%= team[0].Pos %></font></font>
+            </div>
+            <% if(team[0].Pos=='C'){ %>
+              <div class="stats-group">
+                  <font class="Name attr1">REB/G<br><font class="lastName"><%= ((parseInt(team[0].ORB)+parseInt(team[0].DRB))/team[0].G).toFixed(1) %></font></font>
+              </div>
+              <div class="stats-group">
+                  <font class="Name attr2">BLK/G<br><font class="lastName"><%= (team[0].BLK/team[0].G).toFixed(1) %></font></font>
+              </div>
+            <% }else if(team[0].Pos=='F'){ %>
+              <div class="stats-group">
+                  <font class="Name attr1">PTS/G<br><font class="lastName"><%= (team[0].PTS/team[0].G).toFixed(1) %></font></font>
+              </div>
+              <div class="stats-group">
+                  <font class="Name attr2">STL/G<br><font class="lastName"><%= (team[0].STL/team[0].G).toFixed(1) %></font></font>
+              </div>
+            <% }else{ %>
+              <div class="stats-group">
+                  <font class="Name attr1">PTS/G<br><font class="lastName"><%= (team[0].PTS/team[0].G).toFixed(1) %></font></font>
+              </div>
+              <div class="stats-group">
+                  <font class="Name attr2">AST/G<br><font class="lastName"><%= (team[0].AST/team[0].G).toFixed(1) %></font></font>
+              </div>
+            <% } %>
+            <div class="stats-group">
+              <font class="Name age">Age<br><font class="lastName"><%= parseInt(team[0].Age) %>y</font></font>
+            </div>
+            <div class="stats-group">
+              <font class="Name salary">Salary<br><font class="lastName"><%= (parseInt(team[0].last_year_salary) > 1000000)?((team[0].last_year_salary/1000000).toFixed(1)):(parseInt((team[0].last_year_salary/1000))) %><%= (parseInt(team[0].last_year_salary) > 1000000)?'M':'K' %></font></font>
+            </div>
+          </div>
+          <div class="stats-group result-group">
+            <font class="Name ">Hall Of Fame<br><font class="lastName hof" style="color:#00FF1E;">39%</font></font>
+          </div>
+          <div class="stats-group result-group">
+            <font class="Name ">First Team<br><font class="lastName ft" style="color:#00FF1E;">28%</font></font>
+          </div>
+          <div class="stats-group result-group">
+            <font class="Name ">Defense Team<br><font class="lastName dt" style="color:#00FF1E;">21%</font></font>
+          </div>
+          <button class="calc_result" firstname="<%= team[0].firstName %>" lastname="<%= team[0].lastName %>">Caculate</button>
+        </div>
+      </div>
+      <div class="player_parent" style="display: block;">
+        <div class="player_head">
+          <table class="player_table">
+            <tr>
+              <td class="team-banner center" colspan="7" style="background-color: <%= team_color %>;"><%= team_name %></td>
+            </tr>
+            <tr class="no-light">
+              <th class="center" style="width: 5%;">#</th>
+              <th style="width: 40%;">Name</th>
+              <th style="width: 15%;">Position</th>
+              <th style="width: 10%;">Gamed</th>
+              <th style="width: 10%;">Game Started</th>
+              <th style="width: 10%;">Age</th>
+              <th style="width: 10%;">PER</th>
+            </tr>
+          </table>
+        </div>
+        <div class="player_list">
+          <table class="player_table">
+            <tr>
+              <td colspan="7"><%= team_name %></td>
+            </tr>
+            <%
+              for( var i = 0; i < team.length; i++){ 
+                ft1N="";
+                ft2N="";
+                ft1="";
+                ft2="";
+                if(team[i].Pos=='G' || team[i].Pos=='F'){
+                  ft1N="PTS/G";
+                  ft1=(team[i]['PTS']/team[i]['G']).toFixed(1);
+                }
+                else {
+                  ft1N="REB/G";
+                  ft1=((parseInt(team[i]['ORB'])+parseInt(team[i]['DRB']))/team[i]['G']).toFixed(1);
+                }
+                if(team[i].Pos=='G'){
+                  ft2N="AST/G";
+                  ft2=(team[i]['AST']/team[i]['G']).toFixed(1);
+                }
+                else if (team[i].Pos=='F'){
+                  ft2N="STL/G";
+                  ft2=(team[i]['STL']/team[i]['G']).toFixed(1);
+                }
+                else {
+                  ft2N="BLK/G";
+                  ft2=(team[i]['BLK']/team[i]['G']).toFixed(1);
+                }
+            %>
+
+                <tr class="<% if(i==0){ %>select<% } %> clickable" <% for (let k = 0; k < Object.keys(team[i]).length; k++){ %> <%= Object.keys(team[i])[k] %>="<%= team[i][Object.keys(team[i])[k]] %>" <% } %> ps="-1" pid="<%= team[i].PID %>" index="<%= i %>" jersey="<%= team[i].Jersey %>" age="<%= team[i].Age %>" pos="<%= team[i].Pos %>" firstname="<%= team[i].Name.split(' ',1) %>" lastname="<%= team[i].Name.replace(team[i].Name.split(' ',1)+' ','') %>" salary="<%= (parseInt(team[i].last_year_salary) > 1000000)?((team[i].last_year_salary/1000000).toFixed(1)):parseInt(team[i].last_year_salary/1000) %><%= (parseInt(team[i].last_year_salary) > 1000000)?'M':'K' %>" ft1N="<%= ft1N %>" ft2N="<%= ft2N %>" ft1="<%= ft1 %>" ft2="<%= ft2 %>">
+                  <td class="center" style="width: 5%;"><%= team[i].Jersey %></td>
+                  <td style="width: 40%;"><%= team[i].Name %></td>
+                  <td style="width: 15%;"><%= team[i].Pos %></td>
+                  <td style="width: 10%;"><%= team[i].G %></td>
+                  <td style="width: 10%;"><%= team[i].GS %></td>
+                  <td style="width: 10%;"><%= team[i].Age %></td>
+                  <td style="width: 10%;"><%= parseInt(team[i].PER) %></td>
+                </tr>
+                <%
+              }
+            %>
+          </table>
+        </div>
+      </div>
+      <div class="result_panel" style="display: none;">
+        <div style="margin-top: 20px;">
+          <a href="javascript: back();" style="font-size: 20px;color: black;margin-left:60px;padding-top: 20px;"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+        </div>
+        <div class="result_area" style="position: relative;float: right;left: 30px;right: 30px;height: calc( 80vh - 345px );display: block;width: calc( 100% - 60px );">
+            <div class="resultChar1Container" style="display: inline-block;">
+                <canvas id="resultChart1"></canvas>
+            </div>
+            <div class="stats-group-container">
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">PTS/G<br><font class="PTSG ft" style="color:gray;"></font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">MP<br><font class="MP ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">Age<br><font class="AGE ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">PER<br><font class="PER ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">TS%<br><font class="TS ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">TRB%<br><font class="TRB ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">BLK%<br><font class="BLK ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">TOV%<br><font class="TOV ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">EFF<br><font class="EFF ft" style="color:gray;">28%</font></font>
+                </div>
+                <div class="stats-group" style="display: inline-block;float: unset;vertical-align: top;">
+                    <font class="Name " style="color: black;">WS<br><font class="WS ft" style="color:gray;">28%</font></font>
+                </div>
+            </div>
+            <div class="stats-group" style="    text-align: right;display: inline-block;position: absolute;right: 50px;bottom: 8px;">
+                <font class="Name " style="color: black;">Projected Salary<br><font class="PS ft" style="color:green;">$</font></font>
+            </div>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+  <script>
+    function back(){
+      $('.player_parent').show();
+      $('.result_panel').hide();
+      $('.calc_result').show();
+    }
+    $(document).ready(function(){
+      var resultChartCTX1 = document.getElementById("resultChart1");
+var resultChart1 = new Chart(resultChartCTX1, {
+    type: 'radar',
+    data: {
+        labels: ['PTS', 'AST', 'REB', 'STL', 'BLK'],
+        datasets: [{
+            backgroundColor: "<%= team_color_rgba %>",
+            borderColor: "<%= team_color %>",
+            data: [50, 50, 50, 50, 50],
+        }]
+    },
+    options: {
+        aspectRatio: 1,
+        legend: {
+          display: false
+        },
+        scale: {
+          ticks: {
+            backdropColor: '#E3E5E3',
+            fontSize: 0,
+            stepSize: 20,
+            beginAtZero: true,
+            min: 1,
+            max: 100
+          },
+          pointLabels: {
+            fontSize: 15
+          }
+        }
+    }
+});
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+
+      $('.player_list').scroll(function(){
+        if($('.player_list').scrollTop()>0){
+          $('.player_head').addClass('player_shadow');
+        }else{
+          $('.player_head').removeClass('player_shadow');
+        }
+      });
+      $('body').on('click','.calc_result',function(){
+        $(this).hide();
+        $('.loader').fadeIn();
+        $('.panel').addClass('blur');
+        $.post('https://nsap-server.ms300k.com.tw/result', {
+          'pID': $('.select.clickable').attr('pid')
+        }, function(res){
+          console.log(res);
+          $('.loader').fadeOut();
+          $('.panel').removeClass('blur');
+          removeData(resultChart1);
+          removeData(resultChart1);
+          removeData(resultChart1);
+          removeData(resultChart1);
+          removeData(resultChart1);
+          addData(resultChart1,'PTS',parseInt($('.select.clickable').attr('ypts_rank')));
+          addData(resultChart1,'AST',parseInt($('.select.clickable').attr('yast_rank')));
+          addData(resultChart1,'REB',parseInt($('.select.clickable').attr('ytrb_rank')));
+          addData(resultChart1,'STL',parseInt($('.select.clickable').attr('ystl_rank')));
+          addData(resultChart1,'BLK',parseInt($('.select.clickable').attr('yblk_rank')));
+          $('.player_parent').hide();
+          $('.result_panel').show();
+          $('.PTSG.ft').html(parseFloat($('.select.clickable').attr('yPTS')).toFixed(1));
+          $('.AGE.ft').html(parseInt($('.select.clickable').attr('Age')));
+          $('.PER.ft').html(parseInt($('.select.clickable').attr('PER')));
+          $('.MP.ft').html($('.select.clickable').attr('MP'));
+          $('.TS.ft').html(parseFloat($('.select.clickable').attr('TS%')).toFixed(3));
+          $('.TRB.ft').html($('.select.clickable').attr('TRB%'));
+          $('.BLK.ft').html($('.select.clickable').attr('BLK%'));
+          $('.TOV.ft').html($('.select.clickable').attr('TOV%'));
+          $('.EFF.ft').html(parseInt($('.select.clickable').attr('EFF')));
+          $('.WS.ft').html($('.select.clickable').attr('WS'));
+          if (parseInt(res) > 1000000) {
+            $('.PS.ft').html((parseInt(res)/1000000).toFixed(1)+'M');
+          }else{
+            $('.PS.ft').html((parseInt(res)/1000).toFixed(1)+'K');
+          }
+          
+        });
+        
+      });
+      $('body').on('click','.back-home-btn',function(){
+        window.location = "/";
+      });
+      $('body').on('click','tr.clickable',function(){
+        $('tr.select').removeClass('select');
+        $(this).addClass('select');
+        $('.jersey').html('#'+$(this).attr('jersey'));
+        $('.pname').html($(this).attr('firstname')+'<br><font class="lastName">'+$(this).attr('lastname')+'</font>');
+        $('.player-photo').attr('src','/public/headshots/'+$(this).attr('pid')+'.png');
+        $('.Name.pos').html('Position<br><font class="lastName">'+$(this).attr('pos')+'</font>');
+        $('.Name.age').html('Age<br><font class="lastName">'+$(this).attr('age')+'</font>');
+        $('.Name.salary').html('Salary<br><font class="lastName">'+$(this).attr('salary')+'</font>');
+        $('.Name.attr1').html($(this).attr('ft1N')+'<br><font class="lastName">'+$(this).attr('ft1')+'</font>');
+        $('.Name.attr2').html($(this).attr('ft2N')+'<br><font class="lastName">'+$(this).attr('ft2')+'</font>');
+        $('.calc_result').attr('firstname',$(this).attr('firstname'));
+        $('.calc_result').attr('lastname',$(this).attr('lastname'));
+        $('.calc_result').attr('played',$(this).attr('played'));
+        if(parseInt($(this).attr('ps'))==-1){
+          $('.result-group').hide();
+          $('.calc_result').show();
+        }else{
+          $('.select').attr('ps',$(this).attr('ps'));
+          $('.result-group').show();
+          $('.calc_result').hide();
+        }
+      });
+    });
+  </script>
+</html>

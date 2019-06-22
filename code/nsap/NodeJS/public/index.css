@@ -1,0 +1,70 @@
+body{
+  background-color: #F2F2F2;
+}
+*{
+	user-select: none;
+}
+.main-container{
+  height: 100vh;
+  position: relative;
+}
+.bg{
+  width: 800px;
+  margin-left: calc( 50% - 400px );
+  margin-top: calc( 50vh - 280px );
+  z-index: -2;
+}
+.logo{
+  width: 450px;
+  margin-top: 70vh;
+  position: absolute;
+  z-index: 100;
+}
+.feature-icon{
+  width: 80px;
+  position: absolute;
+  margin-left: calc( 100% - 350px );
+  margin-top: 68vh;
+  z-index: 100;
+}
+.firstteam-icon{
+  margin-left: calc( 100% - 230px );
+}
+.defenseteam-icon{
+  margin-left: calc( 100% - 110px );
+}
+.select-team{
+  height: 80vh;
+  text-align: center;
+}
+.team_logo{
+  width: 400px;
+  margin-top: calc( 40vh - 300px );
+}
+.start_btn{
+  height: 37px;
+  width: 300px;
+  background-color: #0A153C;
+  outline: none;
+  color: white;
+  border: 0;
+  font-size: 15px;
+  margin-top: 60px;
+}
+.start_btn:hover{
+  background-color: #2D467F;
+}
+.menu-control{
+  font-size: 37px;
+  transform: translate(0,calc( 40vh - 300px ));
+  cursor: pointer;
+}
+.menu-control:hover{
+  color: gray;
+}
+.menu-control.glyphicon-menu-right{
+  margin-left: 100px;
+}
+.menu-control.glyphicon-menu-left{
+  margin-right: 100px;
+}
