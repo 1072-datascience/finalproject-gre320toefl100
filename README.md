@@ -12,11 +12,19 @@
 ### Demo 
 You should provide an example commend to reproduce your result
 ```Python
-jupyter notebook code/data_preprocess.ipynb #根據www.basketball-reference.com，爬下並前處理資料
-jupyter notebook code/visualization.ipynb #Visualization
-jupyter notebook code/modeling.ipynb #Training Model
+jupyter notebook code/data_preprocess.ipynb
+jupyter notebook code/visualization.ipynb
+jupyter notebook code/modeling.ipynb
 ```
 * any on-line visualization
+
+### System Demo
+```Shell
+cd code/nsap/NodeJS
+npm init
+npm start
+```
+* Then the system will run on your machine
 
 ## Folder organization and its related information
 
@@ -28,28 +36,53 @@ jupyter notebook code/modeling.ipynb #Training Model
 
 ### data
 
-* Source
-* Input format
+* Source: 根據[www.basketball-reference.com](www.basketball-reference.com)的球員資料，爬下並前處理資料
+* Input format: .csv
 * Any preprocessing?
-  * Handle missing data
-  * Scale value
+  * 先依照各年度，scrape球員基本資料、球員薪資資料、球員進階資料
+  * 合併此三大資料
+  * 設定球員ID並簡化position
+  * 薪資資料缺值補0
 
 ### code
 
 * Which method do you use?
+  * Linear model, RandomForest
 * What is a null model for comparison?
 * How do your perform evaluation? ie. Cross-validation, or extra separated data
 
 ### results
 
 * Which metric do you use 
-  * precision, recall, R-square
+  * RMSE
 * Is your improvement significant?
 * What is the challenge part of your project?
 
 ## Reference
 * Code/implementation which you include/reference (__You should indicate in your presentation if you use code for others. Otherwise, cheating will result in 0 score for final project.__)
+  * [urllib.request](https://docs.python.org/3/library/urllib.request.html)
+  * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+  * [pandas](https://pandas.pydata.org/pandas-docs/stable/)
+  * [numpy](https://docs.scipy.org/doc/numpy/reference/)
+  * [matplotlib](https://matplotlib.org/3.1.0/contents.html)
+  * [seaborn](https://seaborn.pydata.org/)
+  * [scikit-learn](https://scikit-learn.org/stable/documentation.html)
+  * [xgboost](https://xgboost.readthedocs.io/en/latest/)
 * Packages you use
+  * Python:
+    * sys
+    * csv
+    * urllib.request
+    * beautifulsoup4
+    * math
+    * pandas
+    * numpy
+    * matplotlib
+    * seaborn
+    * sklearn
+    * xgboost
+  * Node.js:
+
 * Related publications
 
 
