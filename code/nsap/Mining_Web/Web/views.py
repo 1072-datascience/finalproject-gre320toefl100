@@ -4,7 +4,11 @@ from django.shortcuts import render, render_to_response
 import pandas as pd
 import numpy as np
 import sklearn
+
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import StreamingHttpResponse, JsonResponse

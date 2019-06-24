@@ -200,7 +200,7 @@ module.exports = function(app) {
     });
     app.get('/test', function(req, res){
       var options = {
-        url: 'http://192.168.43.2:8000/result',
+        url: 'http://localhost:8000/result',
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -285,7 +285,7 @@ module.exports = function(app) {
                 var adv_ppts=String(total).split('pts" >')[2];
                 var ppts=String(String(adv_ppts).split('</')[0]).replace('<strong>','');
                 var options = {
-                  url: 'http://192.168.43.2:8000/home',
+                  url: 'http://localhost:8000/home',
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

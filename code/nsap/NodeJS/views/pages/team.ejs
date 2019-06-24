@@ -267,7 +267,7 @@ function removeData(chart) {
         $(this).hide();
         $('.loader').fadeIn();
         $('.panel').addClass('blur');
-        $.post('https://nsap-server.ms300k.com.tw/result', {
+        $.post('http://localhost:8000/result', {
           'pID': $('.select.clickable').attr('pid')
         }, function(res){
           console.log(res);

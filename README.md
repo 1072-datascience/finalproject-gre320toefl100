@@ -1,4 +1,4 @@
-# NBA 薪資預測
+# [GRE320TOEFL100] NBA 薪資預測
 
 ### Groups
 * 王瀚 104703002
@@ -18,13 +18,24 @@ jupyter notebook code/modeling.ipynb
 ```
 * any on-line visualization
 
-### System Demo
+### Run Front-end Server
 ```Shell
 cd code/nsap/NodeJS
-npm init
+npm install
 npm start
 ```
-* Then the system will run on your machine
+* front-end server will then run on [http://localhost:3002/](http://localhost:3002/)
+
+### Run Back-end Server
+```Shell
+cd code/nsap/Mining_Web
+# we recommend creating a virtual environment as following:
+# virtualenv --python=python3 --no-site-packages .env
+# source .env/bin/activate
+pip3 install -r requirements.txt
+python3 manage.py runserver 0.0.0.0:8000
+```
+* back-end server will then run on [http://localhost:8000/](http://localhost:8000/)
 
 ## Folder organization and its related information
 
@@ -55,7 +66,8 @@ npm start
 
 ### results
 
-* Which metric do you use 
+* Already deploy on AWS: [https://npsp.ms300k.com.tw](https://npsp.ms300k.com.tw)
+* Which metric do you use?
   * RMSE
 * Is your improvement significant?
   * Not bad
