@@ -98,7 +98,12 @@ python3 manage.py runserver 0.0.0.0:8000
     * sklearn
     * xgboost
   * Node.js:
-
+    * body-parser
+    * csv-parse
+    * ejs
+    * express
+    * nodemon
+    * request
 * Related publications
 
 
