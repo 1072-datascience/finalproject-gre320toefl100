@@ -47,16 +47,20 @@ npm start
 ### code
 
 * Which method do you use?
-  * Linear model, RandomForest
+  * LinearRegression
 * What is a null model for comparison?
+  * RandomForestRegressor
 * How do your perform evaluation? ie. Cross-validation, or extra separated data
+  * Use test data (train : test = 3 : 1)
 
 ### results
 
 * Which metric do you use 
   * RMSE
 * Is your improvement significant?
+  * Not bad
 * What is the challenge part of your project?
+  * In NBA, NBA organizations need to follow Collective Bargaining Agreement to sign or trade players. Collective Bargaining Agreement specified many signature rules liked salary cap, rookie exception, Larry Bird exception, and so on. Accrodingly, can not only deal with staticsis.
 
 ## Reference
 * Code/implementation which you include/reference (__You should indicate in your presentation if you use code for others. Otherwise, cheating will result in 0 score for final project.__)
