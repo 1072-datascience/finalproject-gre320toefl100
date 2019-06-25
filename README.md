@@ -16,7 +16,7 @@ jupyter notebook code/data_preprocess.ipynb
 jupyter notebook code/visualization.ipynb
 jupyter notebook code/modeling.ipynb
 ```
-* any on-line visualization
+* Already deploy on AWS: [https://npsp.ms300k.com.tw](https://npsp.ms300k.com.tw)
 
 ### Run Front-end Server
 ```Shell
