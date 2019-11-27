@@ -47,7 +47,7 @@ python3 manage.py runserver 0.0.0.0:8000
 
 ### data
 
-* Source: 根據[www.basketball-reference.com](www.basketball-reference.com)的球員資料，爬下並前處理資料
+* Source: 根據[http://www.basketball-reference.com](http://www.basketball-reference.com)的球員資料，爬下並前處理資料
 * Input format: .csv
 * Any preprocessing?
   * 先依照各年度，scrape球員基本資料、球員薪資資料、球員進階資料
